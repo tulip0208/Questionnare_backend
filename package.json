@@ -1,0 +1,19 @@
+{
+  "name": "survey1.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mysql2": "^1.5.3",
+    "nodemon": "^3.0.3",
+    "sequelize": "^6.35.2"
+  }
+}
