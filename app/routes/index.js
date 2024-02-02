@@ -1,13 +1,30 @@
+const passport = require("passport");
 const validate = require("../services/validate.service.js");
+const passport_service = require('../services/passport.service.js')
+
+const requireAuth = passport.authenticate("jwt", { session: false });
+const requireLogin = passport.authenticate("local", { session: false });
+
 
 module.exports = app => {
+    //review controller
     const reviewController = require("../controller/review.controller.js");
   
-    var router = require("express").Router();
+    var router1 = require("express").Router();
+    router1.post("/create", validate.happy_validate, validate.review_validate, reviewController.create);
   
-    // Create a new Tutorial
-    router.post("/create", validate.happy_validate, validate.review_validate, reviewController.create);
-  
+    app.use('/review', router1);
+
+    //user controller
+    const userController = require("../controller/user.controller.js");
+    var router2 = require("express").Router();
+    router2.get('/login', requireLogin, userController.signin)
+    router2.post('/tokenLogin', requireAuth, userController.tokenLogin)
+    router2.post('/putpassword', userController.putPassword)
+
+    app.use('/', router2)
+    
+
     // // Retrieve all Tutorials
     // router.get("/", tutorials.findAll);
   
@@ -26,6 +43,5 @@ module.exports = app => {
     // // Delete all Tutorials
     // router.delete("/", tutorials.deleteAll);
   
-    app.use('/review', router);
 };
   

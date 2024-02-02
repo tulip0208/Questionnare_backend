@@ -1,6 +1,6 @@
 module.exports = {
   // Secret key for JWT signing and encryption
-  secret: 'super secret passphrase',
+  secret: 'suvey system 1.0',
   // db_collection_prefix: 'ciis_',
   lang: 'en',
   // CORS setting
