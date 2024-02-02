@@ -21,5 +21,6 @@ db.sequelize = sequelize;
 
 db.review = require("./review.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
+db.store = require("./store.model.js")(sequelize, Sequelize);
 
 module.exports = db;

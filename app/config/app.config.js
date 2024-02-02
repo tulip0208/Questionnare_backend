@@ -5,7 +5,7 @@ module.exports = {
   lang: 'en',
   // CORS setting
   // allowed_origin: ['http://localhost:3000', 'https://localhost:4000'],
-
+  server_url: "localhost:8080",
   // Setting port for server
   expiresIn: 3600 * 72, // 3 days
   // Database connection information

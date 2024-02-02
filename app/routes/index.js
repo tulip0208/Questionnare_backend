@@ -9,7 +9,6 @@ const requireLogin = passport.authenticate("local", { session: false });
 module.exports = app => {
     //review controller
     const reviewController = require("../controller/review.controller.js");
-  
     var router1 = require("express").Router();
     router1.post("/create", validate.happy_validate, validate.review_validate, reviewController.create);
   
@@ -20,9 +19,18 @@ module.exports = app => {
     var router2 = require("express").Router();
     router2.get('/login', requireLogin, userController.signin)
     router2.post('/tokenLogin', requireAuth, userController.tokenLogin)
-    router2.post('/putpassword', userController.putPassword)
+    router2.post('/putpassword', requireAuth, userController.putPassword)
 
     app.use('/', router2)
+    
+    //store manage controller
+    const storeController = require("../controller/store.controller")
+    var router3 = require("express").Router();
+    router3.get('/view', storeController.view)
+    router3.post('/create_or_update', storeController.createOrUpdate)
+    router3.post('/delete', storeController.delete)
+
+    app.use("/store", router3)
     
 
     // // Retrieve all Tutorials
