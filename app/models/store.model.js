@@ -8,16 +8,31 @@ module.exports = (sequelize, Sequelize) => {
       store_name: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+          notEmpty: true
+        }
+      },
+      store_url_name: {
+        type: Sequelize.STRING,
+        unique: true,
+        validate: {
+          notEmpty: true
+        }
       },
       store_business_url: {
         type: Sequelize.STRING,
-        allowNull: false,
+        unique: true,
+        validate: {
+          isUrl: true,
+        }
       },
       questionnare_url: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        unique: true,
+        // validate: {
+        //   isUrl: true,
+        // }
       },
     });
   

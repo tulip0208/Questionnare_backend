@@ -10,8 +10,9 @@ exports.createOrUpdate = async (req, res) => {
             where: { store_name: req.body.store_name },
             defaults: {
                 store_name: req.body.store_name,
+                store_url_name: req.body.store_url_name,
                 store_business_url: req.body.store_business_url,
-                questionnare_url: `${config.server_url}/questionnaire?name=${req.body.store_name}`
+                questionnare_url: `${config.server_url}/questionnaire?name=${req.body.store_url_name}`
             }
         });
         if (created) {
@@ -20,13 +21,14 @@ exports.createOrUpdate = async (req, res) => {
                 store
             })
         } else {
-            if(store.store_name === req.body.store_name && store.store_business_url === req.body.store_business_url){
+            if(store.store_name === req.body.store_name && store.store_url_name === req.body.store_url_name && store.store_business_url === req.body.store_business_url){
                 res.json({ message: lang("failed") })
             }
             else{
                 const [ updated ] = await Store.update({
+                    store_url_name: req.body.store_url_name,
                     store_business_url: req.body.store_business_url,
-                    questionnare_url: `${config.server_url}/questionnaire?name=${req.body.store_name}`
+                    questionnare_url: `${config.server_url}/questionnaire?name=${req.body.store_url_name}`
                 }, {
                     where: {
                         store_name: req.body.store_name

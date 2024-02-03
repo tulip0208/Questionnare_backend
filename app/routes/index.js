@@ -26,9 +26,9 @@ module.exports = app => {
     //store manage controller
     const storeController = require("../controller/store.controller")
     var router3 = require("express").Router();
-    router3.get('/view', storeController.view)
-    router3.post('/create_or_update', storeController.createOrUpdate)
-    router3.post('/delete', storeController.delete)
+    router3.get('/view', requireAuth, storeController.view)
+    router3.post('/create_or_update', requireAuth, storeController.createOrUpdate)
+    router3.post('/delete', requireAuth, storeController.delete)
 
     app.use("/store", router3)
     
