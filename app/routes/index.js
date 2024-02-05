@@ -10,7 +10,7 @@ module.exports = app => {
     //review controller
     const reviewController = require("../controller/review.controller.js");
     var router1 = require("express").Router();
-    router1.post("/create", validate.happy_validate, validate.review_validate, reviewController.create);
+    router1.post("/create", reviewController.create);
   
     app.use('/review', router1);
 
@@ -29,8 +29,16 @@ module.exports = app => {
     router3.get('/view', requireAuth, storeController.view)
     router3.post('/create_or_update', requireAuth, storeController.createOrUpdate)
     router3.post('/delete', requireAuth, storeController.delete)
+    router3.post('/getStoreInfo', storeController.getStoreInfo)
 
     app.use("/store", router3)
+
+    //notification controller
+    const notificationController = require("../controller/notification.controller.js")
+    var router4 = require("express").Router();
+    router4.put("/empty", requireAuth, notificationController.empty)
+
+    app.use("/notification", router4)
     
 
     // // Retrieve all Tutorials

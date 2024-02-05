@@ -3,8 +3,8 @@ const validate = require("../utils/validation").validate;
 
 exports.happy_validate = (req, res, next) => {
     if(req.body.happy != 0 && req.body.happy != 1){
-        res.status(422).send({
-            errMsg: lang('invalid_happy')
+        res.status(500).send({
+            errMsg: lang('failed')
         });
         return false;
     }

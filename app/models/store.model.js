@@ -33,7 +33,7 @@ module.exports = (sequelize, Sequelize) => {
         // validate: {
         //   isUrl: true,
         // }
-      },
+      }
     });
   
     return store;
