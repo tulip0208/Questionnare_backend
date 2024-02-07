@@ -7,12 +7,15 @@ module.exports = (sequelize, Sequelize) => {
       },
       username: {
         type: Sequelize.STRING,
-        unique: true
+        unique: true,
+        validate: {
+          isEmail: true,
+        }
       },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
-      }
+      },
     });
   
     return user;

@@ -5,6 +5,7 @@ const Op = db.Sequelize.Op;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const config = require("../config/app.config");
+const lang = require("../lang/lang")
 
 exports.signin = async (req, res) => {
     try {
@@ -59,24 +60,33 @@ exports.tokenLogin = async (req, res) => {
 
 exports.putPassword = async (req, res) => {
     try {
-        const user_one = await User.findOne({ where: { username: req.body.username } });
+        console.log(req.user.username)
+        console.log(req.body)
+        const user_one = await User.findOne({ where: { username: req.user.username } });
 
         if (!user_one) return res.status(400).send({ message: "no username" });
     
-        if (req.body.password !== "" || req.body.newPassword !== "") {
+        if (req.body.password !== "" && req.body.newPassword !== "") {
+            console.log(req.body.password)
+            console.log(user_one.password)
             const isMatch = await bcrypt.compare(req.body.password, user_one.password);
+            console.log(isMatch)
             if (!isMatch)
                 return res.status(400).send({ message: "no password" });
+
             const salt = await bcrypt.genSalt(10);
-            req.body.newPassword = await bcrypt.hash(req.body.newPassword, salt);
+            var newPassword = await bcrypt.hash(req.body.newPassword, salt);
     
-            await User.update({ password: req.body.newPassword }, {
+            var updated = await User.update({ password: newPassword }, {
                 where: {
-                    username: req.body.username
+                    username: req.user.username
                 }
               });
     
-            res.send({ message: "sucess" });
+            updated ? res.send({ message: "sucess" }) : res.status(400).send({ message: lang("failed") });
+        }
+        else {
+            return res.status(400).send({ message: "no username" });
         }            
     } catch (error) {
         res.status(500).json({ message: error.message });

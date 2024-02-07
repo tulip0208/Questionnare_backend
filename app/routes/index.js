@@ -11,6 +11,8 @@ module.exports = app => {
     const reviewController = require("../controller/review.controller.js");
     var router1 = require("express").Router();
     router1.post("/create", reviewController.create);
+    router1.post("/getReviewData", requireAuth, reviewController.getReviewData);
+    router1.post("/setReadState", requireAuth, reviewController.setReadState)
   
     app.use('/review', router1);
 

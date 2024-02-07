@@ -17,8 +17,17 @@ const localOptions = {
 // Setting up local login strategy
 const localLogin = new LocalStrategy(localOptions, async (username, password, done) => {
 
+  // const salt = await bcrypt.genSalt(10);
+  // const password1 = await bcrypt.hash("qazxsw", salt)
+  // const user1 = await User.create({
+  //   username: "Admin",
+  //   password: password1
+  // });
+  // return;
+
   try {
     var user = await User.findOne({ where: { username: username } });
+    console.log(user)
   } catch (err) {
     return done(err);
   }
@@ -33,6 +42,7 @@ const localLogin = new LocalStrategy(localOptions, async (username, password, do
   bcrypt.compare(password, user.password, function (err, isMatch) {
     if (err) { return done(err); }
     if (!isMatch) {
+      console.log("----------------")
       return done(null, {
         error: { password: 'Incorrect Password.' },
         statusCode: 461,

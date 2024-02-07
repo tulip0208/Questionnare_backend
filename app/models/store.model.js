@@ -23,9 +23,9 @@ module.exports = (sequelize, Sequelize) => {
       store_business_url: {
         type: Sequelize.STRING,
         unique: true,
-        validate: {
-          isUrl: true,
-        }
+        // validate: {
+        //   isUrl: true,
+        // }
       },
       questionnare_url: {
         type: Sequelize.STRING,
