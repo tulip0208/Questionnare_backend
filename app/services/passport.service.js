@@ -17,14 +17,6 @@ const localOptions = {
 // Setting up local login strategy
 const localLogin = new LocalStrategy(localOptions, async (username, password, done) => {
 
-  // const salt = await bcrypt.genSalt(10);
-  // const password1 = await bcrypt.hash("qazxsw", salt)
-  // const user1 = await User.create({
-  //   username: "Admin",
-  //   password: password1
-  // });
-  // return;
-
   try {
     var user = await User.findOne({ where: { username: username } });
     console.log(user)
