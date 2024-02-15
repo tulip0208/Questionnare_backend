@@ -5,7 +5,7 @@ module.exports = {
   lang: 'en',
   // CORS setting
   // allowed_origin: ['http://localhost:3000', 'https://localhost:4000'],
-  server_url: "http://localhost:5173",
+  server_url: "http://x162-43-21-229.static.xvps.ne.jp",
   // Setting port for server0
   expiresIn: 3600 * 72, // 3 days
   // Database connection information
