@@ -5,6 +5,10 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    // group_id: {
+    //   type: Sequelize.STRING,
+    //   allowNull: false
+    // },
     select_type: {
       type: Sequelize.STRING,
       allowNull: false,

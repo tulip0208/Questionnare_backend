@@ -6,7 +6,11 @@ const Op = db.Sequelize.Op;
 
 exports.view = async (req, res) => {
     try {
-        const papersetting = await Papersetting.findAll();
+        const papersetting = await Papersetting.findAll({
+            order: [
+                ['question_id', 'ASC']
+            ]
+        });
         res.json({
             questions: papersetting
         })
@@ -34,7 +38,7 @@ exports.create = async (req, res) => {
                 question_name,
                 select1,
                 select2,
-                require
+                require: true
             });
             paper !== null ? res.json({ message: lang("created") }) : res.json({ message: lang("failed") })
         }
@@ -75,7 +79,7 @@ exports.update = async (req, res) => {
             select1,
             select2,
             connect,
-            require
+            require: select_type === '1' ? true : require
         }, {
             where: {
                 id
