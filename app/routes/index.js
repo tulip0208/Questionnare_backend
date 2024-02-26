@@ -13,8 +13,18 @@ module.exports = app => {
     router1.post("/create", reviewController.create);
     router1.post("/getReviewData", requireAuth, reviewController.getReviewData);
     router1.post("/setReadState", requireAuth, reviewController.setReadState)
-  
+
     app.use('/api/review', router1);
+
+    //papersetting controller
+    const papersettingController = require("../controller/papersetting.controller.js");
+    var router5 = require("express").Router();
+    router5.post("/create", papersettingController.create);
+    router5.post("/update", papersettingController.update);
+    router5.post("/delete", papersettingController.delete);
+    router5.get("/view", papersettingController.view);
+
+    app.use('/api/papersetting', router5);
 
     //user controller
     const userController = require("../controller/user.controller.js");
@@ -25,7 +35,7 @@ module.exports = app => {
     router2.post('/putpassword', requireAuth, userController.putPassword)
 
     app.use('/api/', router2)
-    
+
     //store manage controller
     const storeController = require("../controller/store.controller")
     var router3 = require("express").Router();
@@ -42,25 +52,24 @@ module.exports = app => {
     router4.put("/empty", requireAuth, notificationController.empty)
 
     app.use("/api/notification", router4)
-    
+
 
     // // Retrieve all Tutorials
     // router.get("/", tutorials.findAll);
-  
+
     // // Retrieve all published Tutorials
     // router.get("/published", tutorials.findAllPublished);
-  
+
     // // Retrieve a single Tutorial with id
     // router.get("/:id", tutorials.findOne);
-  
+
     // // Update a Tutorial with id
     // router.put("/:id", tutorials.update);
-  
+
     // // Delete a Tutorial with id
     // router.delete("/:id", tutorials.delete);
-  
+
     // // Delete all Tutorials
     // router.delete("/", tutorials.deleteAll);
-  
+
 };
-  

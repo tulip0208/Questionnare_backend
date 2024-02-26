@@ -22,6 +22,7 @@ db.sequelize = sequelize;
 db.review = require("./review.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.store = require("./store.model.js")(sequelize, Sequelize);
+db.papersetting = require('./papersetting.model.js')(sequelize, Sequelize);
 db.notification = require("./notification.model.js")(sequelize, Sequelize);
 
 module.exports = db;
