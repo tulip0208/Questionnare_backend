@@ -33,6 +33,7 @@ exports.create = async (req, res) => {
         if (select_type === '1') {
             const paper = await Papersetting.create({
                 select_type,
+                group_id: req.body.group_id,
                 question_id,
                 question_no: questionNo,
                 question_name,
@@ -45,6 +46,7 @@ exports.create = async (req, res) => {
         else if (select_type === '2') {
             const paper = await Papersetting.create({
                 select_type,
+                group_id: req.body.group_id,
                 question_id,
                 question_no: questionNo,
                 question_name,
@@ -73,6 +75,7 @@ exports.update = async (req, res) => {
 
         const [updated] = await Papersetting.update({
             select_type,
+            group_id: req.body.group_id,
             question_id,
             question_no: questionNo,
             question_name,

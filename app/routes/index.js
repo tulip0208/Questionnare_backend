@@ -16,16 +16,6 @@ module.exports = app => {
 
     app.use('/api/review', router1);
 
-    //papersetting controller
-    const papersettingController = require("../controller/papersetting.controller.js");
-    var router5 = require("express").Router();
-    router5.post("/create", papersettingController.create);
-    router5.post("/update", papersettingController.update);
-    router5.post("/delete", papersettingController.delete);
-    router5.get("/view", papersettingController.view);
-
-    app.use('/api/papersetting', router5);
-
     //user controller
     const userController = require("../controller/user.controller.js");
     var router2 = require("express").Router();
@@ -53,23 +43,23 @@ module.exports = app => {
 
     app.use("/api/notification", router4)
 
+    //papersetting controller
+    const papersettingController = require("../controller/papersetting.controller.js");
+    var router5 = require("express").Router();
+    router5.post("/create", requireAuth, papersettingController.create);
+    router5.post("/update", requireAuth, papersettingController.update);
+    router5.post("/delete", requireAuth, papersettingController.delete);
+    router5.get("/view", requireAuth, papersettingController.view);
 
-    // // Retrieve all Tutorials
-    // router.get("/", tutorials.findAll);
+    app.use('/api/papersetting', router5);
 
-    // // Retrieve all published Tutorials
-    // router.get("/published", tutorials.findAllPublished);
+    //group controller
+    const groupController = require("../controller/group.controller.js");
+    var router6 = require("express").Router();
+    router6.post("/create", requireAuth, groupController.create);
+    router6.post("/delete", requireAuth, groupController.delete);
+    router6.get("/view", requireAuth, groupController.view);
 
-    // // Retrieve a single Tutorial with id
-    // router.get("/:id", tutorials.findOne);
-
-    // // Update a Tutorial with id
-    // router.put("/:id", tutorials.update);
-
-    // // Delete a Tutorial with id
-    // router.delete("/:id", tutorials.delete);
-
-    // // Delete all Tutorials
-    // router.delete("/", tutorials.deleteAll);
+    app.use('/api/group', router6);
 
 };

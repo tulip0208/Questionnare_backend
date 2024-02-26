@@ -5,10 +5,10 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    // group_id: {
-    //   type: Sequelize.STRING,
-    //   allowNull: false
-    // },
+    group_id: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
     select_type: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -50,7 +50,7 @@ module.exports = (sequelize, Sequelize) => {
 
   // Define hook before saving
   papersetting.beforeCreate(async (instance, options) => {
-    const existingData = await papersetting.findOne({ where: { question_no: { [Sequelize.Op.like]: 'Q1%' } } });
+    const existingData = await papersetting.findOne({ where: { question_no: { [Sequelize.Op.like]: 'Q1' }, group_id: instance.dataValues.group_id } });
     if (instance.dataValues.question_no === 'Q1' && existingData) {
       throw new Error("Data with prefix 'Q1' already exists.");
     }
