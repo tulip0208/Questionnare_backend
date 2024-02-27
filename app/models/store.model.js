@@ -27,6 +27,9 @@ module.exports = (sequelize, Sequelize) => {
         //   isUrl: true,
         // }
       },
+      store_group_id: {
+        type: Sequelize.INTEGER
+      },
       questionnare_url: {
         type: Sequelize.STRING,
         unique: true,

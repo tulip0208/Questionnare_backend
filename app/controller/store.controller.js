@@ -11,13 +11,14 @@ exports.createOrUpdate = async (req, res) => {
                 store_name: req.body.store_name,
                 store_url_name: req.body.store_url_name,
                 store_business_url: req.body.store_business_url,
-                questionnare_url: `${config.server_url}/questionnaire?name=${req.body.store_url_name}`
+                store_group_id: req.body.group_id,
+                questionnare_url: `${config.server_url}/questionnaire?name=${req.body.store_url_name}&id=${req.body.group_id}`
             });
             store !== null ? res.json({ message: lang("created") }) : res.json({ message: lang("failed") })
         }
         else {
             const store = await Store.findOne({ where: { id: req.body.store_id } });
-            if (store.id === req.body.store_id && store.store_name === req.body.store_name && store.store_url_name === req.body.store_url_name && store.store_business_url === req.body.store_business_url) {
+            if (store.store_group_id === req.body.store_group_id && store.id === req.body.store_id && store.store_name === req.body.store_name && store.store_url_name === req.body.store_url_name && store.store_business_url === req.body.store_business_url) {
                 res.json({ message: lang("failed") })
             }
             else {
@@ -25,7 +26,8 @@ exports.createOrUpdate = async (req, res) => {
                     store_name: req.body.store_name,
                     store_url_name: req.body.store_url_name,
                     store_business_url: req.body.store_business_url,
-                    questionnare_url: `${config.server_url}/questionnaire?name=${req.body.store_url_name}`
+                    store_group_id: req.body.store_group_id,
+                    questionnare_url: `${config.server_url}/questionnaire?name=${req.body.store_url_name}&id=${req.body.store_group_id}`
                 }, {
                     where: {
                         id: req.body.store_id
